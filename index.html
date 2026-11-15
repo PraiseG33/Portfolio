@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Praise | Front-end Developer</title>
+<meta name="description" content="Front-end developer building fast, mobile-friendly web apps with Vue.js and Tailwind CSS.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F6FBEA;--surface:#FFFFFF;--ink:#12361F;--muted:#4F6B57;--line:#D4E5BF;--accent:#84CC16;--accent-ink:#12361F;--link:#2D6A12;--chip:#E4F2CC;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0F2415;--surface:#173222;--ink:#EAF6E0;--muted:#A9C4A0;--line:#2A4A33;--accent:#A3E635;--accent-ink:#0F2415;--link:#B5EA6B;--chip:#21412C}
+}
+:root[data-theme="dark"]{--bg:#0F2415;--surface:#173222;--ink:#EAF6E0;--muted:#A9C4A0;--line:#2A4A33;--accent:#A3E635;--accent-ink:#0F2415;--link:#B5EA6B;--chip:#21412C}
+html{scroll-behavior:smooth;scroll-padding-top:calc(4.5rem + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 "DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:Sora,"Arial Black",system-ui,sans-serif;margin:0;line-height:1.1}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
+
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:3.5rem}
+.logo{font:800 1.2rem Sora,sans-serif;color:var(--ink);text-decoration:none}
+.logo b{color:var(--accent)}
+nav ul{display:flex;gap:1.1rem;list-style:none;margin:0;padding:0}
+nav ul a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:.3rem 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav ul a:hover{color:var(--ink);border-color:var(--accent)}
+
+.hero{padding:4rem 0 3.5rem;display:grid;gap:2.5rem;grid-template-columns:1.15fr .85fr;align-items:center}
+.hello{color:var(--muted);font-weight:500;margin:0 0 .75rem}
+h1{font-size:clamp(2.8rem,10vw,5.2rem);font-weight:800;letter-spacing:-.03em}
+.typed{font:700 1.3rem Sora,sans-serif;margin:1rem 0 0;min-height:1.9rem}
+.typed::after{content:"";display:inline-block;width:3px;height:1.2em;margin-left:4px;vertical-align:-.2em;background:var(--accent);animation:blink 1s steps(1) infinite}
+.lead{color:var(--muted);max-width:32rem;margin:1rem 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.btn{display:inline-block;padding:.75rem 1.3rem;border-radius:.5rem;font-weight:700;text-decoration:none;border:2px solid var(--ink);color:var(--ink);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 6px 0 var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{box-shadow:0 6px 0 var(--ink)}
+
+.code{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;overflow:hidden;font:.9rem/1.7 ui-monospace,Menlo,Consolas,monospace;animation:float 6s ease-in-out infinite}
+.code .bar{display:flex;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid var(--line);background:var(--chip)}
+.code .bar i{width:.7rem;height:.7rem;border-radius:50%;background:var(--accent);opacity:.9}
+.code .bar i:nth-child(2){opacity:.55}.code .bar i:nth-child(3){opacity:.25}
+.code pre{margin:0;padding:1rem 1.1rem;overflow-x:auto;color:var(--ink)}
+.k{color:var(--accent)}.s{color:var(--link)}.c{color:var(--muted)}
+
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2{font-size:1.9rem;font-weight:700;margin-bottom:1.75rem}
+
+.project{background:var(--surface);border:1px solid var(--line);border-radius:.9rem;padding:1.75rem;display:grid;gap:1rem;transition:transform .25s,box-shadow .25s;margin-bottom:1.25rem}
+.project:hover{transform:translateY(-5px);box-shadow:0 10px 0 var(--accent)}
+.project h3{font-size:1.5rem}
+.project .sub{color:var(--muted);margin:.3rem 0 0}
+.project ul{margin:0;padding-left:1.2rem}
+.project li{margin:.3rem 0}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;list-style:none}
+.chips li{background:var(--chip);padding:.25rem .75rem;border-radius:2rem;font-size:.9rem;font-weight:500;margin:0;transition:background .2s,color .2s,transform .2s}
+.chips li:hover{background:var(--accent);color:var(--accent-ink);transform:translateY(-2px)}
+.links{display:flex;gap:1.25rem;flex-wrap:wrap}
+.links a{font-weight:700}
+.project.next{background:transparent;border:2px dashed var(--line)}
+
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;align-items:start}
+.about p{margin:0 0 1rem;max-width:36rem}
+.facts{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:.75rem;padding:1.25rem 1.4rem;margin:0}
+.facts dt{font-weight:700;font-size:.95rem}
+.facts dd{margin:0 0 .9rem;color:var(--muted)}
+.facts dd:last-child{margin-bottom:0}
+@media (max-width:48rem){.about{grid-template-columns:1fr}}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1.25rem}
+.skills div{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1.25rem}
+.skills h3{font-size:1.05rem;margin-bottom:.75rem}
+
+.timeline{list-style:none;margin:0;padding:0 0 0 1.5rem;border-left:3px solid var(--line)}
+.timeline li{position:relative;margin-bottom:1.75rem}
+.timeline li::before{content:"";position:absolute;left:calc(-1.5rem - 8.5px);top:.45rem;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+.timeline strong{display:block;font-size:1.1rem}
+.timeline span{color:var(--muted);font-size:.95rem}
+.timeline p{margin:.4rem 0 0;color:var(--muted)}
+
+.contact p{margin:.4rem 0}
+.contact a{font-weight:700}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+.hero .in{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards}
+.hero .in:nth-child(2){animation-delay:.12s}.hero .in:nth-child(3){animation-delay:.24s}.hero .in:nth-child(4){animation-delay:.36s}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.show{opacity:1;transform:none}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:0}}
+@keyframes float{50%{transform:translateY(-8px)}}
+
+@media (max-width:48rem){.hero{grid-template-columns:1fr;padding-top:2.5rem}nav ul{gap:.8rem}nav ul a{font-size:.85rem}}
+@media (max-width:30rem){.logo{display:none}nav .wrap{justify-content:center}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .in,.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Praise<b>.</b></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <p class="hello in">Hi, I am</p>
+      <h1 class="in">Praise</h1>
+      <p class="typed in" id="typed" aria-label="Front-end developer">Front-end developer</p>
+      <p class="lead in">I build web apps that load fast, fit small phone screens and keep working when the network drops. 
+        I studied Software Engineering at the University of Delta, Agbor.</p>
+      <div class="actions in">
+        <a class="btn primary" href="#projects">View my work</a>
+        <a class="btn" href="https://github.com/PraiseG33" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="code in" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+<pre><span class="c">// praise.js</span>
+<span class="k">const</span> praise = {
+  role: <span class="s">"Front-end developer"</span>,
+  stack: [<span class="s">"Vue"</span>, <span class="s">"Tailwind"</span>],
+  based: <span class="s">"Delta, Nigeria"</span>,
+  open: <span class="k">true</span>
+};</pre>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2 class="reveal">About me</h2>
+    <div class="about">
+      <div class="reveal">
+        <img src="IMG_6965~3.jpg" alt="Photo of Praise" width="144" height="144" style="border-radius:50%;object-fit:cover;border:4px solid #84CC16;display:block;margin:0 0 1.5rem">
+        <p>I am a Software Engineering student, and I focus on front-end development. I like turning a design into a clean, fast interface that works well on a phone, because many users open websites on their phones first.</p>
+        <p>I started working with Vue.js, Tailwind CSS and Git during my internship at Schoolville Training Centre. For my final-year project, CoopVault/DCMS, I built a cooperative management system and added offline support, so it keeps working when the connection drops.</p>
+        <p>I currently work as an Administrative Officer at Covenant Royal College in Asaba. I am excited to connect with like-minded individuals and explore opportunities that allow me to contribute my skills and learn from others in a the tech community. Whether it's through
+          internships, projects, or collaborations, i'm eager to apply my knowledge.
+        </p>
+      </div>
+      <dl class="facts reveal">
+        <dt>Based in</dt><dd>Delta State, Nigeria</dd>
+        <dt>Studied</dt><dd>B.Sc. Software Engineering, University of Delta</dd>
+        <dt>Focus</dt><dd>Front-end development</dd>
+        <dt>Main tools</dt><dd>Vue, Tailwind CSS, Git</dd>
+        <dt>Looking for</dt><dd>A front-end developer role</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="reveal">Projects</h2>
+    <article class="project reveal">
+      <div>
+        <h3>CoopVault / DCMS</h3>
+        <p class="sub">Final-year project: a cooperative management system</p>
+      </div>
+      <ul>
+        <li>Member portal for tracking attendance and contributions.</li>
+        <li>Works offline as a progressive web app and adapts to mobile screens.</li>
+        <li>Deployed on Vercel through GitHub.</li>
+      </ul>
+      <ul class="chips"><li>Vue.js</li><li>Tailwind CSS</li><li>Vite</li><li>PWA</li><li>Local Storage</li></ul>
+      <div class="links">
+        <a href="https://dig-coop.vercel.app" target="_blank" rel="noopener">Live site</a>
+        <a href="https://github.com/PraiseG33/dig-coop" target="_blank" rel="noopener">GitHub repo</a>
+      </div>
+    </article>
+  </section>
+
+  <section id="skills">
+    <h2 class="reveal">Skills</h2>
+    <div class="skills">
+      <div class="reveal"><h3>Languages</h3><ul class="chips"><li>JavaScript</li><li>HTML</li><li>CSS</li></ul></div>
+      <div class="reveal"><h3>Frameworks</h3><ul class="chips"><li>Vue</li><li>Tailwind CSS</li><li>Daisy UI</li></ul></div>
+      <div class="reveal"><h3>Tools</h3><ul class="chips"><li>Git</li><li>GitHub</li><li>VS Code</li><li>Figma</li><li>Vite</li><li>Vercel</li></ul></div>
+      <div class="reveal"><h3>Also</h3><ul class="chips"><li>Responsive design</li><li>PWA</li><li>IT support</li></ul></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="reveal">Experience</h2>
+    <ul class="timeline">
+      <li class="reveal">
+        <strong>Administrative Officer</strong>
+        <span>Covenant Royal College, Asaba | September 2026 to present</span>
+      </li>
+      <li class="reveal">
+        <strong>Intern</strong>
+        <span>Schoolville Training Centre, Asaba | April to September 2025</span>
+        <p>Built responsive pages with Vue.js and Tailwind CSS, and used Git for version control.</p>
+      </li>
+      <li class="reveal">
+        <strong>B.Sc. Software Engineering</strong>
+        <span>University of Delta, Agbor | 2022 to 2026</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2 class="reveal">Contact</h2>
+    <div class="reveal">
+      <p>Email: <a href="mailto:you@example.com">praisegbayisomore@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/PraiseG33" target="_blank" rel="noopener">github.com/PraiseG33</a></p>
+      <p>Phone: +234 814 300 6445</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Praise. Built with HTML and CSS.</div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var el = document.getElementById("typed");
+  var roles = ["Front-end developer","Vue.js builder","Mobile-first designer"];
+  if(!reduce){
+    var r = 0, i = 0, del = false;
+    (function tick(){
+      var word = roles[r];
+      el.textContent = word.slice(0, i);
+      if(!del && i < word.length){ i++; setTimeout(tick, 80); }
+      else if(!del){ del = true; setTimeout(tick, 1400); }
+      else if(i > 0){ i--; setTimeout(tick, 40); }
+      else { del = false; r = (r + 1) % roles.length; setTimeout(tick, 300); }
+    })();
+  }
+  var items = document.querySelectorAll(".reveal");
+  if(reduce || !("IntersectionObserver" in window)){
+    items.forEach(function(n){ n.classList.add("show"); });
+    return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("show"); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  items.forEach(function(n){ io.observe(n); });
+})();
+</script>
+</body>
+</html>
